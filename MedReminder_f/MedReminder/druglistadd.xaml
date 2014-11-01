@@ -1,0 +1,104 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="MedReminder.druglistadd"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Background1.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Medicine Reminder" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="add medicine" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock Height="43" HorizontalAlignment="Left" Margin="25,20,0,0" Name="textBlock1" Text="Medicine Name:" VerticalAlignment="Top" Width="158" FontSize="22" />
+                <TextBox Height="69" HorizontalAlignment="Left" Margin="203,6,0,0" Name="medname" Text="" VerticalAlignment="Top" Width="229" BorderThickness="1" FontSize="22" />
+                <TextBlock Height="34" HorizontalAlignment="Left" Margin="24,89,0,0" Name="textBlock2" Text="Dose" VerticalAlignment="Top" Width="92" FontSize="22" />
+                <TextBlock Height="40" HorizontalAlignment="Left" Margin="158,89,0,0" Name="textBlock3" Text="Course" VerticalAlignment="Top" Width="114" FontSize="22" />
+                <TextBlock Height="55" HorizontalAlignment="Left" Margin="291,89,0,0" Name="textBlock4" Text="Total quantity available" VerticalAlignment="Top" Width="141" AllowDrop="False" IsHitTestVisible="True" Visibility="Visible" TextWrapping="Wrap" FontSize="22" TextAlignment="Center" />
+                <TextBox Height="57" HorizontalAlignment="Left" Margin="2,149,0,0" Name="dose" Text="" VerticalAlignment="Top" Width="107" BorderThickness="1" Padding="0" FontSize="20" />
+                <TextBox Height="57" HorizontalAlignment="Left" Margin="128,150,0,0" Name="course" Text="" VerticalAlignment="Top" Width="131" Padding="0" BorderThickness="1" FontSize="20" />
+                <TextBox Height="57" HorizontalAlignment="Left" Margin="291,150,0,0" Name="quantity" Text="" VerticalAlignment="Top" Width="150" BorderThickness="1" Padding="0" FontSize="20" />
+                <TextBlock Height="45" HorizontalAlignment="Left" Margin="175,217,0,0" Name="textBlock5" Text="Alarm:" VerticalAlignment="Top" Width="65" FontSize="22" />
+                <TextBox Height="70" HorizontalAlignment="Left" Margin="0,204,0,0" Name="alarmContent" Text="Cause" VerticalAlignment="Top" Width="169" FontSize="20" BorderThickness="1" Padding="1" />
+                <toolkit:TimePicker x:Name="timePicker1" Margin="233,204,67,64" Height="58" />
+                <Image Source="/Images/appbar.new.rest.png" Width="55" Height="55" Margin="395,207,6,64" Tap="addalaram" />
+                <TextBlock Height="34" HorizontalAlignment="Left" Margin="12,286,0,0" Name="textBlock6" Text="Dosage Timing:" VerticalAlignment="Top" Width="171" FontSize="24" />
+            </Grid>
+            
+            <ListBox x:Name="lbAlarms" Grid.Row="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="440">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Width="360">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock 
+                                Text="{Binding Title}" 
+                                Grid.Row="0"
+                                VerticalAlignment="Center" 
+                                Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                FontSize="22" />
+                                <TextBlock 
+                                Text="{Binding BeginTime}" 
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource PhoneTextSubtleStyle}" 
+                                FontSize="22" />
+                            </Grid>
+                            <Image 
+                                Source="/Images/appbar.delete.png" 
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Width="55" Height="55"
+                                FlowDirection="RightToLeft" Tap="removealarm" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Border BorderBrush="Silver" BorderThickness="2" Height="209" HorizontalAlignment="Left" Margin="4,0,0,0" Name="border1" VerticalAlignment="Top" Width="450" Grid.Row="1" />
+        </Grid>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.save.png" Text="save" Click="savedruglist" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
